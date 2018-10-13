@@ -11,7 +11,6 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
 })
 export class AppComponent {
   title = 'Login-testing';
-  public myData: Object ;
   public selected: Object;
   constructor(private getData: LoginService){
  
