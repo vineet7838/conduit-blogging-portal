@@ -16,11 +16,9 @@ constructor(private http: HttpClient) {
 
   }
  
-  // getUserData(data){
-  //   console.log(data);
-  // }
+  
   authUser(user){
-   // console.log(user);
+   
     console.log(JSON.stringify({user}));
     const httpOptions = {
       headers: new HttpHeaders({
@@ -28,8 +26,7 @@ constructor(private http: HttpClient) {
       })
     };
     
-    console.log(this.http.post(`${this.url}users/login`,JSON.stringify({user})));
-    return this.http.post(`${this.url}users/login`,JSON.stringify({user}),httpOptions);
-    
+    var a= this.http.post(`${this.url}users/login`,JSON.stringify({user}),httpOptions);
+   return a;
   }
 }
