@@ -11,15 +11,21 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
 })
 export class AppComponent {
   title = 'Login-testing';
-  
   public myData: Object ;
+  public selected: Object;
   constructor(private getData: LoginService){
-   
+ 
     }
     registerUser(form: NgForm){
      
-     this.getData.authUser(form.value).subscribe(status=> console.log(JSON.stringify(status)));
-    //console.log(status);
+     this.getData.authUser(form.value).subscribe((status: Object )=> {
+      this.displayData(status);
+    });
+    
+    }
+    displayData(data){
+      this.selected = data;
+      console.log(this.selected);
     }
     
   ngOnInit(){}
