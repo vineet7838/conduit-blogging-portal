@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService} from './login.service';
+
 import { NgForm } from '@angular/forms';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
@@ -11,21 +11,6 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
 })
 export class AppComponent {
   title = 'Login-testing';
-  public selected: Object;
-  constructor(private getData: LoginService){
- 
-    }
-    registerUser(form: NgForm){
-     
-     this.getData.authUser(form.value).subscribe((status: Object )=> {
-      this.displayData(status);
-    });
-    
-    }
-    displayData(data){
-      this.selected = data;
-      console.log(this.selected);
-    }
-    
+  constructor(){}
   ngOnInit(){}
 }
