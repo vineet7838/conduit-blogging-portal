@@ -25,12 +25,10 @@ comments:Array<Object>;
     //It get all the comments of that particular article
     this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
       this.saveComments(status);
-      console.log(status);
     });
   }
   saveData(data){
     this.selected=data;
-    console.log(this.selected);
   }
   saveComments(data){
     this.comments=data;
@@ -39,9 +37,14 @@ comments:Array<Object>;
     this.getData.postComment(comment.value,this.slug).subscribe((status: Object )=> {console.log(status)});
     this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
       this.saveComments(status);
-      console.log(status);
     });
   }
-
+  deleteComment(id){
+  this.getData.removeComment(id,this.slug).subscribe((status: Object)=>{});
+  this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
+    this.saveComments(status);
+  });
+  
+  }
 
 }

@@ -27,4 +27,14 @@ export class DisplayServiceService {
     var a= this.http.get(`${this.url}articles/${slug}/comments`);
     return a;    
   }
+  removeComment(id,slug){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization':'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzkzNzIsInVzZXJuYW1lIjoiVmluZWUiLCJleHAiOjE1NDQ3NzM2MzF9.5Wbmpz9oPIZoc6U9s0kVgd0tp0ngiWE1LU3_4hOKflw'
+      })
+    };
+    var a= this.http.delete(`${this.url}articles/${slug}/comments/${id}`,httpOptions);
+    return a;  
+  }
 }
