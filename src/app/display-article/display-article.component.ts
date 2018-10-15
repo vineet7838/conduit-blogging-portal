@@ -12,23 +12,36 @@ import { NgForm } from '@angular/forms';
 export class DisplayArticleComponent implements OnInit {
 public selected: object;
 slug: string;
+comments:Array<Object>;
   constructor(private router: ActivatedRoute, private getData: DisplayServiceService) { }
 
   ngOnInit() {
     this.router.paramMap.subscribe(params => {
-      this.slug = params.get("slug");
-      this.getData.getArticleDetails(this.slug).subscribe((status: Object )=> {
+    this.slug = params.get("slug");
+    this.getData.getArticleDetails(this.slug).subscribe((status: Object )=> {
         this.saveData(status);
         });
     })
-    
+    //It get all the comments of that particular article
+    this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
+      this.saveComments(status);
+      console.log(status);
+    });
   }
   saveData(data){
     this.selected=data;
     console.log(this.selected);
   }
+  saveComments(data){
+    this.comments=data;
+  }
   addComment(comment: NgForm){
     this.getData.postComment(comment.value,this.slug).subscribe((status: Object )=> {console.log(status)});
+    this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
+      this.saveComments(status);
+      console.log(status);
+    });
   }
+
 
 }
