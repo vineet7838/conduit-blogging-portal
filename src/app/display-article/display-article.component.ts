@@ -39,6 +39,7 @@ comments:Array<Object>;
       this.saveComments(status);
     });
   }
+
   deleteComment(id){
   this.getData.removeComment(id,this.slug).subscribe((status: Object)=>{});
   this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{

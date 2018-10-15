@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NewArticleService } from './new-article.service';
+import { NgForm } from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-new-article',
@@ -6,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-article.component.css']
 })
 export class NewArticleComponent implements OnInit {
+  public data: string;
 
-  constructor() { }
+  constructor(private getData: NewArticleService, private router: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit() {
   }
+  addArticle(form: NgForm){
+    this.getData.publishArticle(form.value).subscribe((status:Object)=>{console.log(status);
+      this.routeToArticle(status);
+    });
+   
 
+  }
+  routeToArticle(status){
+    console.log(status.article.slug);
+    this.data=status.article.slug;
+    this.route.navigate(['articles',this.data], { relativeTo: this.router});
+  }
 }
