@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
 import { AppComponent } from '../app.component';
-import { HttpHeaders } from '@angular/common/http';
+  import { HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 import { HttpResponse } from '@angular/common/http';
 

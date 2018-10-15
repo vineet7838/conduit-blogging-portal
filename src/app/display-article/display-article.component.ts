@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { DisplayServiceService } from './display-service.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-display-article',
@@ -25,6 +26,9 @@ slug: string;
   saveData(data){
     this.selected=data;
     console.log(this.selected);
+  }
+  addComment(comment: NgForm){
+    this.getData.postComment(comment.value,this.slug).subscribe((status: Object )=> {console.log(status)});
   }
 
 }

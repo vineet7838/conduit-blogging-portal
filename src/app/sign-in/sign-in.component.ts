@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 export class SignInComponent implements OnInit {
   public selected: Object;
   constructor(private getData: LoginService) { }
-  registerUser(form: NgForm){
+  loginUser(form: NgForm){
     this.getData.authUser(form.value).subscribe((status: Object )=> {
     this.displayData(status);
     });

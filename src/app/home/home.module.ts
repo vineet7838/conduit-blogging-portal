@@ -4,12 +4,14 @@ import { HomeRoutingModule } from './home-routing.module';
 import { YourFeedComponent } from './your-feed/your-feed.component';
 import { GlobalFeedComponent } from './global-feed/global-feed.component';
 import { DisplayArticleComponent } from '../display-article/display-article.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ],
   declarations: [YourFeedComponent, GlobalFeedComponent,DisplayArticleComponent]
 })

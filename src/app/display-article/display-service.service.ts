@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,16 @@ export class DisplayServiceService {
   getArticleDetails(slug){
     var a= this.http.get(`${this.url}articles/${slug}`);
     return a;
+  }
+  postComment(comment,yslug){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json'
+      })
+    };
+    
+    var a= this.http.post(`${this.url}articles/${slug}/comments`,JSON.stringify(comment),httpOptions);
+    return a;    
+
   }
 }
