@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute,Router, ParamMap} from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { DisplayServiceService } from './display-service.service';
 import { NgForm } from '@angular/forms';
@@ -13,7 +13,8 @@ export class DisplayArticleComponent implements OnInit {
 public selected: object;
 slug: string;
 comments:Array<Object>;
-  constructor(private router: ActivatedRoute, private getData: DisplayServiceService) { }
+  constructor(private router: ActivatedRoute, private getData: DisplayServiceService,
+    private route: Router) { }
 
   ngOnInit() {
     this.router.paramMap.subscribe(params => {
@@ -45,7 +46,13 @@ comments:Array<Object>;
   this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
     this.saveComments(status);
   });
-  
+  }
+  deleteArticle(){
+    this.getData.removeArticle(this.slug).subscribe((status: Object)=>{
+      console.log("Article Deleted")
+      this.route.navigate(['Home',], );
+    });
+   
   }
 
 }
