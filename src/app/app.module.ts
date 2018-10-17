@@ -12,11 +12,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeModule } from './home/home.module';
 import { DisplayArticleComponent } from './display-article/display-article.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
+import { ConduitComponent } from './conduit/conduit.component';
+import { GlobalFeedComponent } from './home/global-feed/global-feed.component';
 
 
 const appRoutes: Routes = [
   { path: 'Home', component: HomeComponent },
-  { path: '',   redirectTo: '/Home', pathMatch: 'full' },
+  // { path: '',   redirectTo: '/Home', pathMatch: 'full' },
+  { path: '',  component: ConduitComponent  },
   { path: 'New-Article', component: NewArticleComponent },
   { path: 'Settings', component: SettingsComponent },
   { path: 'My-Profile', component: MyProfileComponent },
@@ -34,6 +37,8 @@ const appRoutes: Routes = [
     MyProfileComponent,
     SignInComponent,
     EditArticleComponent,
+    ConduitComponent,
+   
     
   ],
   imports: [
