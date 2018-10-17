@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GlobalFeedComponent} from '../home/global-feed/global-feed.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-conduit',
@@ -8,9 +9,13 @@ import {GlobalFeedComponent} from '../home/global-feed/global-feed.component';
 })
 export class ConduitComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit() {
+  }
+  callSignin(){
+    this.route.navigate(["Sign-In"]);
   }
 
 }
