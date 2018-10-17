@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient  } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class NewArticleService {
+export class EditService {
   url: string='https://conduit.productionready.io/api/';
+  user:Object;
   constructor(private http: HttpClient) { }
-  publishArticle(data){
+  getArticleDetails(slug){
+    var a= this.http.get(`${this.url}articles/${slug}`);
+    return a;
+  }
+  modifyArticle(slug,data){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'Authorization':'Token '+localStorage.getItem('Token')
       })
     };
-    console.log(JSON.stringify(data));
-    var a= this.http.post(`${this.url}articles`,JSON.stringify(data),httpOptions);
+    var a= this.http.put(`${this.url}articles/${slug}`,JSON.stringify(data),httpOptions);
     return a;
   }
+  
 }

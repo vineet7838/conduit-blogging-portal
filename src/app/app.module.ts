@@ -11,6 +11,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeModule } from './home/home.module';
 import { DisplayArticleComponent } from './display-article/display-article.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 
 const appRoutes: Routes = [
@@ -19,7 +20,9 @@ const appRoutes: Routes = [
   { path: 'New-Article', component: NewArticleComponent },
   { path: 'Settings', component: SettingsComponent },
   { path: 'My-Profile', component: MyProfileComponent },
-  {path: 'New-Article/articles/:slug', component: DisplayArticleComponent }
+  {path: 'New-Article/articles/:slug', component: DisplayArticleComponent },
+  {path: 'Editor/:slug', component: EditArticleComponent },
+  { path: 'Sign-In', component: SignInComponent },
   
 ];
 @NgModule({
@@ -30,6 +33,7 @@ const appRoutes: Routes = [
     SettingsComponent,
     MyProfileComponent,
     SignInComponent,
+    EditArticleComponent,
     
   ],
   imports: [

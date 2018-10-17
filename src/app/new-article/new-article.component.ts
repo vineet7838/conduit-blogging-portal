@@ -10,6 +10,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class NewArticleComponent implements OnInit {
   public data: string;
+ 
 
   constructor(private getData: NewArticleService, private router: ActivatedRoute,
     private route: Router) { }
@@ -17,7 +18,14 @@ export class NewArticleComponent implements OnInit {
   ngOnInit() {
   }
   addArticle(form: NgForm){
-    this.getData.publishArticle(form.value).subscribe((status:Object)=>{console.log(status);
+   let article={
+      title: form.value.title,
+      description: form.value.description,
+      body: form.value.body,
+      tagList: [form.value.tag, form.value.tag]
+    }
+    
+    this.getData.publishArticle(article).subscribe((status:Object)=>{console.log(status);
       this.routeToArticle(status);
     });
    

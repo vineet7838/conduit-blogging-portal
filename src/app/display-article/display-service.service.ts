@@ -17,7 +17,7 @@ export class DisplayServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
-        'Authorization':'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzkzNzIsInVzZXJuYW1lIjoiVmluZWUiLCJleHAiOjE1NDQ3NzM2MzF9.5Wbmpz9oPIZoc6U9s0kVgd0tp0ngiWE1LU3_4hOKflw'
+        'Authorization':'Token '+localStorage.getItem('Token')
       })
     };
      var a= this.http.post(`${this.url}articles/${slug}/comments`,JSON.stringify(comment),httpOptions);
@@ -31,7 +31,7 @@ export class DisplayServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
-        'Authorization':'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzkzNzIsInVzZXJuYW1lIjoiVmluZWUiLCJleHAiOjE1NDQ3NzM2MzF9.5Wbmpz9oPIZoc6U9s0kVgd0tp0ngiWE1LU3_4hOKflw'
+        'Authorization':'Token '+localStorage.getItem('Token')
       })
     };
     var a= this.http.delete(`${this.url}articles/${slug}/comments/${id}`,httpOptions);
@@ -41,7 +41,7 @@ export class DisplayServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
-        'Authorization':'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzkzNzIsInVzZXJuYW1lIjoiVmluZWUiLCJleHAiOjE1NDQ3NzM2MzF9.5Wbmpz9oPIZoc6U9s0kVgd0tp0ngiWE1LU3_4hOKflw'
+        'Authorization':'Token '+localStorage.getItem('Token')
       })
     };
     var a= this.http.delete(`${this.url}articles/${slug}`,httpOptions);

@@ -52,7 +52,10 @@ comments:Array<Object>;
       console.log("Article Deleted")
       this.route.navigate(['Home',], );
     });
-   
+  }
+
+  editArticle(){
+    this.route.navigate(['Editor',this.slug]);
   }
 
 }
