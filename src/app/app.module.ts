@@ -33,6 +33,7 @@ const appRoutes: Routes = [
   {path: 'New-Article/articles/:slug', component: DisplayArticleComponent },
   {path: 'Editor/:slug', component: EditArticleComponent },
   { path: 'Sign-In', component: SignInComponent },
+  { path: 'Sign-Up', component: SignUpComponent },
   
 ];
 @NgModule({

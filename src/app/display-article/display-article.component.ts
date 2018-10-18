@@ -12,24 +12,44 @@ import { NgForm } from '@angular/forms';
 export class DisplayArticleComponent implements OnInit {
 public selected: object;
 slug: string;
+public username:string;
+public token: string;
+public match:boolean;
 comments:Array<Object>;
   constructor(private router: ActivatedRoute, private getData: DisplayServiceService,
     private route: Router) { }
 
   ngOnInit() {
-    this.router.paramMap.subscribe(params => {
+    this.match=false;
+   this.router.paramMap.subscribe(params => {
     this.slug = params.get("slug");
     this.getData.getArticleDetails(this.slug).subscribe((status: Object )=> {
         this.saveData(status);
         });
+
     })
     //It get all the comments of that particular article
     this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
       this.saveComments(status);
     });
   }
+  callSignin(){
+    this.route.navigate(["Sign-In"]);
+  }
+  callSignup(){
+    this.route.navigate(["Sign-Up"]);
+  }
   saveData(data){
     this.selected=data;
+    this.token = localStorage.getItem('Token');
+    this.username = localStorage.getItem('username');
+    if(this.token){
+      if(this.username===data.article.author.username){
+
+        this.match=true;
+      }
+  }
+    console.log(this.match);
   }
   saveComments(data){
     this.comments=data;
@@ -38,6 +58,7 @@ comments:Array<Object>;
     this.getData.postComment(comment.value,this.slug).subscribe((status: Object )=> {console.log(status)});
     this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
       this.saveComments(status);
+      this.route.navigate([`New-Article/articles/${this.slug}`]);
     });
   }
 
@@ -45,12 +66,13 @@ comments:Array<Object>;
   this.getData.removeComment(id,this.slug).subscribe((status: Object)=>{});
   this.getData.getAllComments(this.slug).subscribe((status: Array<Object>)=>{
     this.saveComments(status);
+    this.route.navigate([`New-Article/articles/${this.slug}`]);
   });
   }
   deleteArticle(){
     this.getData.removeArticle(this.slug).subscribe((status: Object)=>{
       console.log("Article Deleted")
-      this.route.navigate(['Home',], );
+      this.route.navigate([`Home`] );
     });
   }
 

@@ -1,3 +1,20 @@
-<p>
-  sign-up works!
-</p>
+<div>
+    <a class="logo conduit" href="#" >Conduit</a>
+    <nav class="pull-right navbar">
+    <a  href="#">Home</a>&nbsp;&nbsp; 
+    <a (click)="callSignin()">Sign in</a>&nbsp;&nbsp;
+    <a (click)="callSignup()" class="signup"> Sign up</a>  
+    </nav>
+  </div>
+<div>
+  <form #signupForm="ngForm" (ngSubmit) = "registerUser(signupForm)">
+    <label for="username">Enter Username</label>
+    <input type="text" name="username" ngModel>
+    <label for="password">Enter New password</label>
+    <input type="password" name="password" ngModel>
+    <label for="email">Enter Email</label>
+    <input type="email" name="email"ngModel>
+    <button type="submit">Signup</button> 
+  </form>
+  
+  </div>
