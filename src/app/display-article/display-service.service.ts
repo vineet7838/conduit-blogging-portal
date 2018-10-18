@@ -48,4 +48,25 @@ export class DisplayServiceService {
     var a= this.http.delete(`${this.url}articles/${slug}`,httpOptions);
     return a;  
   }
+  follow(user){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'Token '+localStorage.getItem('Token')
+      })
+    };
+  
+    var a= this.http.post(`${this.url}profiles/${user.article.author.username}/follow`,httpOptions);
+    return a;  
+  }
+  favorite(slug){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'Token '+localStorage.getItem('Token')
+      })
+    };
+  
+    var a= this.http.post(`${this.url}articles/${slug}/favorite`,httpOptions);
+    return a;  
+
+  }
 }

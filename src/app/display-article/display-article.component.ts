@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router, ParamMap} from "@angular/router";
-import { switchMap } from "rxjs/operators";
 import { DisplayServiceService } from './display-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -75,9 +74,13 @@ comments:Array<Object>;
       this.route.navigate([`Home`] );
     });
   }
-
   editArticle(){
     this.route.navigate(['Editor',this.slug]);
   }
-
+  followUser(){
+    this.getData.follow(this.selected).subscribe((status)=>{console.log(status)})
+  }
+  favoriteArticle(){
+    this.getData.favorite(this.slug).subscribe((status)=>{console.log(status)})
+  }
 }
