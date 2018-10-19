@@ -41,11 +41,14 @@
         <button (click)="favoriteArticle()">Favourite Article {{selected.article.favoritesCount}}</button>
       </div>
 </div>
-<div>
+<div *ngIf="token">
 <form #comment = "ngForm" (ngSubmit) = "addComment(comment)">
   <input type="textarea" placeholder="Write a comment" name ="body" ngModel>
   <button type="submit">Post Comment</button>
 </form>
+</div>
+<div *ngIf="!token">
+    <button (click) = callSignin()>Post Comment</button>
 </div>
 <div *ngIf="comments">
 <li *ngFor = "let comment of comments.comments">
