@@ -14,10 +14,13 @@ export class MyProfileComponent implements OnInit {
   public username: string;
   public articles: Array<object>;
   limit: Number = 10;
+  public token: string;
+  
 articleCount:Number
 itemPages:any
   
   ngOnInit() {
+
     this.router.paramMap.subscribe(params => {
       this.username = params.get("username");
       this.getData.getProfile(this.username).subscribe((status)=>{
@@ -36,7 +39,15 @@ itemPages:any
   saveUser(data,username){
     this.user=data;
     this.username=username;
-
+    if(localStorage.getItem('Token')){
+      this.token=localStorage.getItem('Token');
+    }
+    }
+    callSignin(){
+      this.route.navigate(["Sign-In"]);
+    }
+    callSignup(){
+      this.route.navigate(["Sign-Up"]);
     }
     saveArticles(data){
       this.articles=data;
