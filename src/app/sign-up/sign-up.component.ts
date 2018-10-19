@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
   storeData(data){
     localStorage.setItem('Token',data.user.token);
       localStorage.setItem('username',data.user.username);
+      localStorage.setItem('userimage',data.user.image);
       this.route.navigate(['Home']);
   }
   callSignin(){

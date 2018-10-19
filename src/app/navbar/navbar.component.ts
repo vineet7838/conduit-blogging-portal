@@ -8,9 +8,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 public username: string;
+public userimage:string;
   constructor(private route: Router, private router: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userimage=localStorage.getItem('userimage');
     this.username=localStorage.getItem('username');
   }
   callProfile(){
