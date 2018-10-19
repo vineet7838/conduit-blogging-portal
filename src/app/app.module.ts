@@ -30,6 +30,7 @@ const appRoutes: Routes = [
   {path: '#',  component: ConduitComponent},
   { path: 'New-Article', component: NewArticleComponent },
   { path: 'Settings', component: SettingsComponent },
+  { path: 'My-Profile/:username', component: MyProfileComponent },
   { path: 'My-Profile', component: MyProfileComponent },
   {path: 'New-Article/articles/:slug', component: DisplayArticleComponent },
   {path: 'Editor/:slug', component: EditArticleComponent },

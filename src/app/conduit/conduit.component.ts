@@ -30,6 +30,11 @@ limit: Number = 10;
     this.route.navigate(['articles',data]);
 
   }
+  callProfile(username){
+    console.log(username);
+    this.route.navigate(["My-Profile",username])
+  
+  }
 saveArticles(articles){
   this.selected=articles;
   this.articleCount= articles.articlesCount;

@@ -38,6 +38,11 @@ comments:Array<Object>;
   callSignup(){
     this.route.navigate(["Sign-Up"]);
   }
+  callProfile(username){
+    console.log(username);
+    this.route.navigate(["My-Profile",username])
+  
+  }
   saveData(data){
     this.selected=data;
     this.token = localStorage.getItem('Token');
@@ -74,6 +79,7 @@ comments:Array<Object>;
       this.route.navigate([`Home`] );
     });
   }
+
   editArticle(){
     this.route.navigate(['Editor',this.slug]);
   }

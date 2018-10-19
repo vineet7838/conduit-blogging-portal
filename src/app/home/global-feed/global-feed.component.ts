@@ -28,7 +28,11 @@ export class GlobalFeedComponent implements OnInit {
     });
   
   }
-    
+callProfile(username){
+  console.log(username);
+  this.route.navigate(["My-Profile",username])
+
+}
 saveArticles(articles){
   this.selected=articles;
   this.articleCount= articles.articlesCount;
