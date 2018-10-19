@@ -10,6 +10,9 @@ import { ConduitService } from './conduit.service';
 })
 export class ConduitComponent implements OnInit {
 public selected: Array<object>;
+limit: Number = 10;
+    articleCount:Number
+    itemPages:any
   constructor(private router: ActivatedRoute,
     private route: Router,private getData: ConduitService) { }
 
@@ -17,6 +20,10 @@ public selected: Array<object>;
 
     this.getData.getArticles().subscribe((status: Array<Object> )=> {
       this.saveArticles(status);
+      this.itemPages = Array.from(
+        new Array(Math.ceil(+this.articleCount / +this.limit)),
+        (val, index) => index + 1
+      );
       });
   }
   getArticleDetails(data){
@@ -25,9 +32,17 @@ public selected: Array<object>;
   }
 saveArticles(articles){
   this.selected=articles;
+  this.articleCount= articles.articlesCount;
+  console.log(this.articleCount);
   console.log(this.selected);
   }
-  
+  clickonList(e){
+    let offset = e * +this.limit;
+    this.getData.makeFeedsRequestonPages(offset).subscribe((data) => {
+        this.saveArticles(data)
+       
+    });
+  }
   callSignin(){
     this.route.navigate(["Sign-In"]);
   }

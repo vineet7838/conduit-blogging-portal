@@ -26,6 +26,7 @@ export class GlobalFeedComponent implements OnInit {
       (val, index) => index + 1
     );
     });
+  
   }
     
 saveArticles(articles){

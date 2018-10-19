@@ -12,6 +12,9 @@ export class MyProfileComponent implements OnInit {
   constructor(private getData: MyProfileService, private route: Router,private router: ActivatedRoute) { }
   public user: Object;
   public articles: Array<object>;
+  limit: Number = 10;
+articleCount:Number
+itemPages:any
   
   ngOnInit() {
     this.getData.getProfile().subscribe((status)=>{
@@ -22,9 +25,15 @@ export class MyProfileComponent implements OnInit {
   }
   saveUser(data){
     this.user=data;
+
     }
     saveArticles(data){
       this.articles=data;
+      this.articleCount=data.articlesCount;
+      this.itemPages = Array.from(
+        new Array(Math.ceil(+this.articleCount / +this.limit)),
+        (val, index) => index + 1
+      );
     }
   callSettings(){
       this.route.navigate(["Settings"]);
@@ -42,6 +51,13 @@ export class MyProfileComponent implements OnInit {
   getArticleDetails(data){
     this.route.navigate(['articles',data]);
 
+  }
+  clickonList(e){
+    let offset = e * +this.limit;
+    this.getData.makeFeedsRequestonPages(offset).subscribe((data) => {
+        this.saveArticles(data)
+       
+    });
   }
 
 }

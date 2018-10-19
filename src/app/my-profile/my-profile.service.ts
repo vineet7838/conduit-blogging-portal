@@ -16,6 +16,9 @@ export class MyProfileService {
     };
    return this.http.get(`${this.url}user`,httpOptions);
   }
+  makeFeedsRequestonPages(offset){
+    return this.http.get(`${this.url}articles?limit=10&offset=${offset}`)
+   }
   getMyArticles(){
     const httpOptions = {
       headers: new HttpHeaders({
