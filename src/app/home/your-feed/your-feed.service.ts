@@ -5,29 +5,47 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class YourFeedService {
-  public url: string='https://conduit.productionready.io/api/';
+  public url: string = 'https://conduit.productionready.io/api/';
 
-  constructor(private http:HttpClient) { }
-  
-  yourFeedArticles(){
+  constructor(private http: HttpClient) { }
+
+  yourFeedArticles() {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'Token '+localStorage.getItem('Token')
+        'Authorization': 'Token ' + localStorage.getItem('Token')
       })
     };
-   var a= this.http.get(`${this.url}articles/feed`,httpOptions);
-   return a;
+    var a = this.http.get(`${this.url}articles/feed`, httpOptions);
+    return a;
   }
-  makeFeedsRequestonPages(offset){
+  makeFeedsRequestonPages(offset) {
     return this.http.get(`${this.url}articles?limit=10&offset=${offset}`)
-   }
-   getTagDetails(e){
+  }
+  getTagDetails(e) {
     return this.http.get(`${this.url}articles?tag=${e}`)
-   }
-   globalFeedArticles(){
-    var a= this.http.get(`${this.url}articles`);
+  }
+  globalFeedArticles() {
+    var a = this.http.get(`${this.url}articles`);
     return a;
 
+  }
+  makeFavorite(slug) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        
+        'Authorization': 'Token ' + localStorage.getItem('Token')
+      })
+    };
+    return this.http.post(`${this.url}articles/${slug}/favorite`,JSON.stringify(slug),httpOptions);
+  }
+  makeUnFavorite(slug) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        
+        'Authorization': 'Token ' + localStorage.getItem('Token')
+      })
+    };
+    return this.http.delete(`${this.url}articles/${slug}/favorite`,httpOptions);
    }
   
 }

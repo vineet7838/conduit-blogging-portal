@@ -55,7 +55,7 @@ export class DisplayServiceService {
       })
     };
   
-    var a= this.http.post(`${this.url}profiles/${user.article.author.username}/follow`,httpOptions);
+    var a= this.http.post(`${this.url}profiles/${user.article.author.username}/follow`,JSON.stringify(user),httpOptions);
     return a;  
   }
   favorite(slug){
@@ -65,8 +65,31 @@ export class DisplayServiceService {
       })
     };
   
-    var a= this.http.post(`${this.url}articles/${slug}/favorite`,httpOptions);
+    var a= this.http.post(`${this.url}articles/${slug}/favorite`,JSON.stringify(slug),httpOptions);
     return a;  
 
   }
+
+  Unfollow(user){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'Token '+localStorage.getItem('Token')
+      })
+    };
+  
+    var a= this.http.delete(`${this.url}profiles/${user.article.author.username}/follow`,httpOptions);
+    return a;  
+  }
+  Unfavorite(slug){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'Token '+localStorage.getItem('Token')
+      })
+    };
+  
+    var a= this.http.delete(`${this.url}articles/${slug}/favorite`,httpOptions);
+    return a;  
+
+  }
+
 }

@@ -28,7 +28,7 @@ export class YourFeedComponent implements OnInit {
     })
   }
 
-  getYourFeed(){
+  getYourFeed() {
     this.getData.yourFeedArticles().subscribe((status: Array<Object>) => {
       this.saveArticles(status);
 
@@ -61,17 +61,16 @@ export class YourFeedComponent implements OnInit {
     });
   }
 
-  clickonTag(e){
-    this.getData.getTagDetails(e).subscribe((data)=>{
+  clickonTag(e) {
+    this.getData.getTagDetails(e).subscribe((data) => {
       console.log(data);
       this.saveTagName(e);
       this.saveArticles(data)
-
     })
 
   }
-  saveTagName(e){
-    this.tag=e;
+  saveTagName(e) {
+    this.tag = e;
   }
   getGlobalFeed() {
     this.getData.globalFeedArticles().subscribe((status: Array<Object>) => {
@@ -82,6 +81,18 @@ export class YourFeedComponent implements OnInit {
         (val, index) => index + 1
       );
 
+    })
+
+  }
+  callFavorite(slug) {
+    this.getData.makeFavorite(slug).subscribe((status) => {
+      this.selected=this.selected;
+    })
+
+  }
+  callUnFavorite(slug) {
+    this.getData.makeUnFavorite(slug).subscribe((status) => {
+      this.selected=this.selected;
     })
 
   }
