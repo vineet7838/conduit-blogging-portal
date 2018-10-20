@@ -1,8 +1,11 @@
 <div class="container">
   <app-navbar></app-navbar>
   <nav>
-    <a id="yourfeed" routerLink="/Home/Your-Feed" routerLinkActive="active">Your Feed</a>&nbsp;&nbsp;
-    <a routerLink="/Home/Global-Feed" routerLinkActive="active">Global Feed</a>
+    <!-- <a id="yourfeed" routerLink="/Home" routerLinkActive="active">Your Feed</a>&nbsp;&nbsp; -->
+    <!-- <a routerLink="/Home/Global-Feed" routerLinkActive="active">Global Feed</a> -->
+    <a (click)="getYourFeed()">Your Feed</a>&nbsp;&nbsp;
+    <a (click)="getGlobalFeed()">Global Feed</a>&nbsp;&nbsp;
+    <a *ngIf="tag">#{{tag}}</a>
   </nav>
   <div class="row">
     <div class="col-md-9">
@@ -34,7 +37,7 @@
       </ul>
     </div>
     <div class="col-md-3">
-      <app-tags></app-tags>
+      <app-tags (listTag)=clickonTag($event)></app-tags>
     </div>
   </div>
   <div *ngIf="articleCount">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,EventEmitter,Input,Output} from '@angular/core';
 import { TagsService } from './tags.service';
 
 @Component({
@@ -20,5 +20,14 @@ export class TagsComponent implements OnInit {
     });
     
   }
+  
+  @Output()
+listTag = new EventEmitter();
 
+sendTag(e){
+  this.listTag.emit(e);
 }
+}
+
+
+

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {GlobalFeedComponent} from '../home/global-feed/global-feed.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConduitService } from './conduit.service';
 
