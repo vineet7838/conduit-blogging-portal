@@ -18,6 +18,7 @@ import { GlobalFeedComponent } from './home/global-feed/global-feed.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ListComponent } from './list/list.component';
+import { TagsComponent } from './tags/tags.component';
 
 
 //import { GlobalFeedComponent } from './home/global-feed/global-feed.component';
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     SignUpComponent,
     ListComponent,
+    TagsComponent,
     
     
     
