@@ -26,6 +26,7 @@ listTag = new EventEmitter();
 
 sendTag(e){
   this.listTag.emit(e);
+ 
 }
 }
 
