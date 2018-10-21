@@ -29,7 +29,7 @@
               <a class="author" (click)="callProfile(article.author.username)">{{article.author.username}}</a>
               <span class="date">{{article.createdAt}}</span>
             </div>
-            <button class="btn btn-sm btn-outline-primary float-right">
+            <button (click)="callSignin()" class="btn btn-sm btn-outline-primary float-right">
               <span>&hearts;{{article.favoritesCount}}</span>
             </button>
           </div>

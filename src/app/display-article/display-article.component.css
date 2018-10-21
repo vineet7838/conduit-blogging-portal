@@ -132,7 +132,11 @@ li{
 .tagdiv ul li{
    
    list-style: none;
+   display: inline-block;
 }
 .tagdiv ul li p {
+    color:  #5cb85c;
+}
+.divsignup p a {
     color:  #5cb85c;
 }

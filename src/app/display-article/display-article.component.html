@@ -24,7 +24,7 @@
         <h1>{{selected.article.title}}</h1>
       </div>
       <div class="article-meta">
-        <img [src]="selected.article.author.image" alt="No Image" height="25px" width="25px" />
+        <img [src]="selected.article.author.image"  height="25px" width="25px" />
         <div class="info">
           <a class="author" (click)="callProfile(selected.article.author.username)">{{selected.article.author.username}}</a>
           <span class="date">{{selected.article.createdAt}}</span>
@@ -56,7 +56,7 @@
     <div class="tagdiv">
       <ul>
         <li *ngFor="let taglist of selected.article.tagList">
-          <p>{{taglist}}</p>
+          <p>{{taglist}}&nbsp;&nbsp;</p> 
         </li>
       </ul>
     </div>
@@ -64,7 +64,7 @@
     <div class="article-actions">
 
       <div class="article-meta ">
-        <img [src]="selected.article.author.image" alt="No Image" height="25px" width="25px" />
+        <img [src]="selected.article.author.image"  height="25px" width="25px" />
         <div class="info">
           <a class="author" (click)="callProfile(selected.article.author.username)" style="color:#5cb85c">{{selected.article.author.username}}</a>
           <span class="date">{{selected.article.createdAt}}</span>
@@ -108,7 +108,7 @@
           </div>
         </form>
       </div>
-      <div class="col-md-6" *ngIf="!token">
+      <div class="col-md-6 divsignup" *ngIf="!token">
         <p>
           <a (click)="callSignin()">Sign In </a> or <a (click)="callSignup()">Sign Up </a>
           to add comment to this article.

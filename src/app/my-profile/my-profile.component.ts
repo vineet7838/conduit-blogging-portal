@@ -15,6 +15,7 @@ export class MyProfileComponent implements OnInit {
   public articles: Array<object>;
   limit: Number = 10;
   public token: string;
+  public following:boolean;
   
 articleCount:Number
 itemPages:any
@@ -24,6 +25,7 @@ itemPages:any
     this.router.paramMap.subscribe(params => {
       this.username = params.get("username");
       this.getData.getProfile(this.username).subscribe((status)=>{
+        console.log(status);
         this.saveUser(status,this.username);
         this.callMyArticles();
        })
@@ -39,6 +41,7 @@ itemPages:any
   saveUser(data,username){
     this.user=data;
     this.username=username;
+    this.following=data.profile.following;
     if(localStorage.getItem('Token')){
       this.token=localStorage.getItem('Token');
     }

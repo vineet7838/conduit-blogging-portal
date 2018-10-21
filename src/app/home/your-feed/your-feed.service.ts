@@ -25,8 +25,8 @@ export class YourFeedService {
     return this.http.get(`${this.url}articles?tag=${e}`)
   }
   globalFeedArticles() {
-    var a = this.http.get(`${this.url}articles`);
-    return a;
+   
+    return this.http.get(`${this.url}articles`);
 
   }
   makeFavorite(slug) {

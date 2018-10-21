@@ -86,7 +86,7 @@ export class YourFeedComponent implements OnInit {
   }
   callFavorite(slug) {
     this.getData.makeFavorite(slug).subscribe((status) => {
-      this.selected=this.selected;
+      
     })
 
   }

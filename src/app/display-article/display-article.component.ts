@@ -88,11 +88,17 @@ export class DisplayArticleComponent implements OnInit {
     this.route.navigate(['Editor', this.slug]);
   }
   followUser() {
+    if(!localStorage.getItem('Token')){
+      this.callSignin();
+    }
     this.getData.follow(this.selected).subscribe((status) => { console.log(status);
-      this.saveFollowing(status);
+       this.saveFollowing(status);
       })
   }
   favoriteArticle() {
+    if(!localStorage.getItem('Token')){
+      this.callSignin();
+    }
     this.getData.favorite(this.slug).subscribe((status) => { console.log(status);
       this.saveData(status); })
   }
