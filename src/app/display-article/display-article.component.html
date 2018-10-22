@@ -9,9 +9,9 @@
       <nav class="navbar">
         <a class="logo conduit" href="#">Conduit</a>
         <div class="navr">
-          <a href="#">Home</a>&nbsp;&nbsp;
-          <a (click)="callSignin()">Sign in</a>&nbsp;&nbsp;
-          <a (click)="callSignup()" class="signup float-right"> Sign up</a>
+            <a  style="cursor:pointer" href="#">Home</a>&nbsp;&nbsp;
+            <a routerLink="/Sign-In" routerLinkActive="active-link" style="cursor:pointer">Sign in</a>&nbsp;&nbsp;
+            <a routerLink="/Sign-Up" routerLinkActive="active-link" style="cursor:pointer" class="signup"> Sign up</a>
         </div>
       </nav>
     </div>
@@ -24,8 +24,8 @@
         <h1>{{selected.article.title}}</h1>
       </div>
       <div class="article-meta">
-        <img [src]="selected.article.author.image"  height="25px" width="25px" />
-        <div class="info">
+        <img *ngIf="selected.article.author.image" [src]="selected.article.author.image" height="25px" width="25px" />
+        <img *ngIf="!selected.article.author.image" ng-src="selected.article.author.image" height="25px" width="25px" />        <div class="info">
           <a class="author" (click)="callProfile(selected.article.author.username)">{{selected.article.author.username}}</a>
           <span class="date">{{selected.article.createdAt}}</span>
         </div>
@@ -37,26 +37,32 @@
       &nbsp;&nbsp;<button class="btn btn-outline-danger btn-sm " (click)="deleteArticle()"><i class="fas fa-trash-alt"></i>Delete
         Article</button>
     </div>
-    <div *ngIf="!match">
-        <button *ngIf="!following" class="btn btn-outline btn-sm " (click)="followUser()"><i
-          class="far fa-star"></i> Follow {{selected.article.author.username}} </button>
+    <div *ngIf="!match && token">
+        <button *ngIf="!following" class="btn btn-outline btn-sm " (click)="followUser()"><i class="fa fa-plus"></i>
+          Follow {{selected.article.author.username}} </button>
           <button *ngIf="following" class="btn  btn-sm " (click)="UnfollowUser()"><i class="far fa-star"></i>
             UnFollow {{selected.article.author.username}} </button>
             &nbsp;&nbsp; 
-     <button *ngIf="!selected.article.favorited" class="btn btn-outline-danger btn-sm " (click)="favoriteArticle()"><i
-          class="far fa-heart"></i>Favourite {{selected.article.favoritesCount}}</button>
-  <button *ngIf="selected.article.favorited" class="btn btn-danger btn-sm " (click)="UnfavoriteArticle()"><i
+            <button *ngIf="!selected.article.favorited" class="btn bt btn-sm btn-outline-success " (click)="favoriteArticle()"><i
+              class="far fa-heart"></i>Favourite Article ({{selected.article.favoritesCount}})</button>  <button *ngIf="selected.article.favorited" class="btn btn-danger btn-sm " (click)="UnfavoriteArticle()"><i
           class="far fa-heart"></i>UnFavourite {{selected.article.favoritesCount}}</button>
     </div>
+    <div *ngIf="!match && !token">
+        <button class="btn btn-outline btn-sm " (click)="callSignup()"><i class="fa fa-plus"></i>
+          Follow {{selected.article.author.username}} </button> &nbsp;&nbsp;
+        <button  class="btn bt btn-sm btn-outline-success" (click)="callSignup()"><i
+            class="far fa-heart"></i>Favourite Article ({{selected.article.favoritesCount}})</button>
+      </div>
   </div>
+
   <div class="container page ">
     <p id="divbody">
       {{selected.article.body}}
     </p>
     <div class="tagdiv">
       <ul>
-        <li *ngFor="let taglist of selected.article.tagList">
-          <p>{{taglist}}&nbsp;&nbsp;</p> 
+          <li class="tag-default tag-pill tag-outline" *ngFor="let taglist of selected.article.tagList">
+              {{taglist}}&nbsp;
         </li>
       </ul>
     </div>
@@ -64,8 +70,8 @@
     <div class="article-actions">
 
       <div class="article-meta ">
-        <img [src]="selected.article.author.image"  height="25px" width="25px" />
-        <div class="info">
+        <img *ngIf="selected.article.author.image" [src]="selected.article.author.image" height="25px" width="25px" />
+        <img *ngIf="!selected.article.author.image" ng-src="selected.article.author.image" height="25px" width="25px" />        <div class="info">
           <a class="author" (click)="callProfile(selected.article.author.username)" style="color:#5cb85c">{{selected.article.author.username}}</a>
           <span class="date">{{selected.article.createdAt}}</span>
           <br>
@@ -76,17 +82,22 @@
           &nbsp;&nbsp;<button class="btn btn-outline-danger btn-sm " (click)="deleteArticle()"><i class="fas fa-trash-alt"></i>Delete
             Article</button>
         </div>
-        <div *ngIf="!match">
-            <button *ngIf="!following" class="btn btn-outline btn-sm " (click)="followUser()"><i
-              class="far fa-star"></i> Follow {{selected.article.author.username}} </button>
-              <button *ngIf="following" class="btn  btn-sm " (click)="UnfollowUser()"><i class="far fa-star"></i>
+        <div *ngIf="!match && token">
+            <button *ngIf="!following" class="btn btn-outline btn-sm " (click)="followUser()"><i class="fa fa-plus"></i> Follow {{selected.article.author.username}} </button>
+              <button *ngIf="following" class="btn  btn-sm " (click)="UnfollowUser()"><i class="far fa-minus"></i>
                 UnFollow {{selected.article.author.username}} </button>
                 &nbsp;&nbsp;
-         <button *ngIf="!selected.article.favorited" class="btn btn-outline-danger btn-sm " (click)="favoriteArticle()"><i
-              class="far fa-heart"></i>Favourite{{selected.article.favoritesCount}}</button>
+                <button *ngIf="!selected.article.favorited" class="btn bt btn-sm btn-outline-success" (click)="favoriteArticle()"><i
+                  class="far fa-heart"></i>Favourite Article ({{selected.article.favoritesCount}})</button>
           <button *ngIf="selected.article.favorited" class="btn btn-danger btn-sm " (click)="UnfavoriteArticle()"><i
               class="far fa-heart"></i>UnFavourite{{selected.article.favoritesCount}}</button>
         </div>
+        <div *ngIf="!match && !token">
+            <button class="btn btn-outline btn-sm " (click)="callSignup()"><i class="fa fa-plus"></i>
+              Follow {{selected.article.author.username}} </button> &nbsp;&nbsp;
+            <button  class="btn bt btn-sm btn-outline-success" (click)="callSignup()"><i
+                class="far fa-heart"></i>Favourite Article ({{selected.article.favoritesCount}})</button>
+          </div>
       </div>
 
     </div>
@@ -101,9 +112,10 @@
               <textarea class="form-control" placeholder="Write a comment.." name="body" rows=4 cols=70 ngModel></textarea>
             </div>
             <div class="card-footer cimage">
-              <img class="float-left img-circle" [src]="selected.article.author.image" alt="No Image" height="25px"
-                width="25px" />
-              <button type="submit" class=" btn btn-sm btn-success float-right">Post Comment</button>
+              <img *ngIf="selected.article.author.image" class="float-left img-circle" [src]="selected.article.author.image" height="25px"
+              width="25px" />
+              <img *ngIf="!selected.article.author.image" class="float-left img-circle" ng-src="selected.article.author.image" height="25px"
+              width="25px" />                <button type="submit" class=" btn btn-sm btn-success float-right">Post Comment</button>
             </div>
           </div>
         </form>
@@ -131,8 +143,8 @@
                 <p class="cbody">{{comment.body}}</p>
               </div>
               <div class="card-footer cimage">
-                <img class=" float-left" [src]="comment.author.image" alt="No Image" height="25px" width="25px" />
-                <a (click)="callProfile(comment.author.username)"><span>{{comment.author.username}}</span></a>
+                <img *ngIf="comment.author.image" class=" float-left" [src]="comment.author.image" height="25px" width="25px" />
+                <img *ngIf="!comment.author.image" class=" float-left" ng-src="comment.author.image" height="25px" width="25px" />
                 <span>{{comment.createdAt}}</span>
                 <a class="float-right" (click)="deleteComment(comment.id)"><i class="fas fa-trash-alt"></i></a>
               </div>

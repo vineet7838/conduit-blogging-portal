@@ -16,6 +16,9 @@ export class MyProfileComponent implements OnInit {
   limit: Number = 10;
   public token: string;
   public following:boolean;
+  public userUserName:string;
+  public userToken:string;
+  match:boolean;
   
 articleCount:Number
 itemPages:any
@@ -24,6 +27,15 @@ itemPages:any
 
     this.router.paramMap.subscribe(params => {
       this.username = params.get("username");
+      this.userUserName=localStorage.getItem('username');
+      console.log(this.userToken);
+      this.userToken=localStorage.getItem('Token');
+      this.match=false;
+      if(this.userToken){
+        if(this.userUserName===this.username){
+          this.match=true;
+        }
+      }
       this.getData.getProfile(this.username).subscribe((status)=>{
         console.log(status);
         this.saveUser(status,this.username);

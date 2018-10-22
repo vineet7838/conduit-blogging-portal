@@ -9,87 +9,45 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DisplayServiceService {
   url: string='https://conduit.productionready.io/api/';
   user:Object;
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization':'Token '+localStorage.getItem('Token')
+    })
+  };
   constructor(private http: HttpClient) { }
   getArticleDetails(slug){
-    var a= this.http.get(`${this.url}articles/${slug}`);
-    return a;
+    return this.http.get(`${this.url}articles/${slug}`);
   }
   postComment(comment,slug){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json',
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-     var a= this.http.post(`${this.url}articles/${slug}/comments`,JSON.stringify(comment),httpOptions);
-    return a;    
+    
+  return this.http.post(`${this.url}articles/${slug}/comments`,JSON.stringify(comment),this.httpOptions);    
   }
   getAllComments(slug){
-    var a= this.http.get(`${this.url}articles/${slug}/comments`);
-    return a;    
+   
+    return this.http.get(`${this.url}articles/${slug}/comments`); 
   }
   removeComment(id,slug){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json',
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-    var a= this.http.delete(`${this.url}articles/${slug}/comments/${id}`,httpOptions);
-    return a;  
+    
+    return this.http.delete(`${this.url}articles/${slug}/comments/${id}`,this.httpOptions);  
   }
   removeArticle(slug){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json',
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-    var a= this.http.delete(`${this.url}articles/${slug}`,httpOptions);
-    return a;  
+   return this.http.delete(`${this.url}articles/${slug}`,this.httpOptions); 
   }
   follow(user){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-  
-    var a= this.http.post(`${this.url}profiles/${user.article.author.username}/follow`,JSON.stringify(user),httpOptions);
-    return a;  
+    return this.http.post(`${this.url}profiles/${user.article.author.username}/follow`,JSON.stringify(user),this.httpOptions);  
   }
   favorite(slug){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-  
-    var a= this.http.post(`${this.url}articles/${slug}/favorite`,JSON.stringify(slug),httpOptions);
-    return a;  
+    
+    return this.http.post(`${this.url}articles/${slug}/favorite`,JSON.stringify(slug),this.httpOptions);
 
   }
 
   Unfollow(user){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-  
-    var a= this.http.delete(`${this.url}profiles/${user.article.author.username}/follow`,httpOptions);
-    return a;  
+    return this.http.delete(`${this.url}profiles/${user.article.author.username}/follow`,this.httpOptions); 
   }
   Unfavorite(slug){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':'Token '+localStorage.getItem('Token')
-      })
-    };
-  
-    var a= this.http.delete(`${this.url}articles/${slug}/favorite`,httpOptions);
-    return a;  
-
+     return this.http.delete(`${this.url}articles/${slug}/favorite`,this.httpOptions);
   }
 
 }

@@ -10,20 +10,22 @@ import { NgForm } from '@angular/forms';
 })
 export class DisplayArticleComponent implements OnInit {
   public selected: object;
-  slug: string;
+  public slug: string;
   public username: string;
   public token: string;
   public match: boolean;
-  comments: Array<Object>;
-  following:boolean;
+  public comments: Array<Object>;
+ public  following:boolean;
   constructor(private router: ActivatedRoute, private getData: DisplayServiceService,
     private route: Router) { }
 
   ngOnInit() {
     this.match = false;
+    this.token=localStorage.getItem('Token');
     this.router.paramMap.subscribe(params => {
       this.slug = params.get("slug");
       this.getData.getArticleDetails(this.slug).subscribe((status: Object) => {
+        console.log(status);
         this.saveData(status);
       });
 
@@ -40,7 +42,7 @@ export class DisplayArticleComponent implements OnInit {
     this.route.navigate(["Sign-Up"]);
   }
   callProfile(username) {
-    console.log(username);
+   
     this.route.navigate(["My-Profile", username])
 
   }
@@ -55,7 +57,7 @@ export class DisplayArticleComponent implements OnInit {
         this.match = true;
       }
     }
-    console.log(this.match);
+
   }
   saveComments(data) {
     this.comments = data;
@@ -79,7 +81,6 @@ export class DisplayArticleComponent implements OnInit {
   }
   deleteArticle() {
     this.getData.removeArticle(this.slug).subscribe((status: Object) => {
-      console.log("Article Deleted")
       this.route.navigate([`Home`]);
     });
   }
@@ -88,17 +89,13 @@ export class DisplayArticleComponent implements OnInit {
     this.route.navigate(['Editor', this.slug]);
   }
   followUser() {
-    if(!localStorage.getItem('Token')){
-      this.callSignin();
-    }
+   
     this.getData.follow(this.selected).subscribe((status) => { console.log(status);
        this.saveFollowing(status);
       })
   }
   favoriteArticle() {
-    if(!localStorage.getItem('Token')){
-      this.callSignin();
-    }
+   
     this.getData.favorite(this.slug).subscribe((status) => { console.log(status);
       this.saveData(status); })
   }

@@ -18,7 +18,7 @@
 
 .page-item a:hover{
     color: #fff;
-    background-color: #5cb85c
+    background-color: #5cb85c !important;
 }
 .page-link {
     display: inline-block;
@@ -26,5 +26,5 @@
 }
 h5{
     background-color: #fff !important;
-    color: #5cb85c
+    color: #5cb85c !important;
 }

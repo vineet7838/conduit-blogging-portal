@@ -26,8 +26,8 @@
 .logo{
     color:#5cb85c;
     text-transform: lowercase;
-    font-family: 'titillium web',sans-serif;
-    font-size: 1.5rem;
+    font-family: 'titillium web',sans-serif!important;
+    font-size: 1.5rem!important;
     padding-top: 0;
     margin-right: 2rem;
     text-decoration:none;
@@ -45,8 +45,7 @@
     float: right;
 }
 .navr a{
-    color: black;
-    text-decoration: none;
+    color: grey;    text-decoration: none;
 }
 .navr a:hover{
     color: #5cb85c;
@@ -97,7 +96,7 @@ h4{
 }
 .article-meta .info .date {
     color: #bbb;
-    font-size: .8rem;
+    font-size: .8rem!important;
     display: block;
 }
 .btn-outline-primary {
@@ -112,4 +111,51 @@ h4{
         font-weight: 300;
         color: #bbb;
         vertical-align: middle;
+    }
+    .active-link{
+        color: black!important;
+        opacity: 1!important;
+    }
+    .tagdiv ul{
+        list-style: none;
+       
+    }
+    .tagdiv ul li{
+        float: right;
+       
+    }
+    .tagdiv ul li button {
+        color: grey;
+        border-bottom-color: #5cb85c;
+    }
+     #gfeed{
+        color:#5cb85c!important;
+        text-decoration:underline!important;
+    } 
+    .tagdiv li{
+        font-weight: 300;
+        font-size: .8rem!important;
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        display: inline-block!important;
+     }
+    .tag-default.tag-outline {
+    border: 1px solid #ddd;
+    color: #aaa!important;
+    background: 0 0!important;
+    }
+    .tag-default {
+    color: #fff!important;
+    font-size: .8rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    white-space: nowrap;
+    margin-right: 3px;
+    margin-bottom: .2rem;
+    display: inline-block;
+    }
+    .tag-pill {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
     }

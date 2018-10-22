@@ -5,9 +5,9 @@
       <nav class="navbar">
         <a class="logo conduit" href="#">Conduit</a>
         <div class="navr">
-          <a href="#">Home</a>&nbsp;&nbsp;
-          <a (click)="callSignin()">Sign in</a>&nbsp;&nbsp;
-          <a (click)="callSignup()" class="signup float-right"> Sign up</a>
+            <a class="active-link" style="cursor:pointer" href="#">Home</a>&nbsp;&nbsp; 
+            <a routerLink="/Sign-In" routerLinkActive="active-link" style="cursor:pointer" >Sign in</a>&nbsp;&nbsp;
+            <a routerLink="/Sign-Up" routerLinkActive="active-link" style="cursor:pointer"  class="signup"> Sign up</a>    
         </div>
       </nav>
     </div>
@@ -21,11 +21,11 @@
   <div class="row">
     <div class="col-md-9">
       <ul class="demo" *ngIf="selected">
-        <a (click)="callGlobalFeed()" >Global Feed</a> &nbsp;&nbsp;<a *ngIf="tag">#{{tag}}</a>
+        <a style="cursor:pointer" id="gfeed" (click)="callGlobalFeed()" >Global Feed</a> &nbsp;&nbsp;<a *ngIf="tag">#{{tag}}</a>
         <li class="article-preview" *ngFor="let article of selected.articles">
           <div class="article-meta">
-            <img [src]="article.author.image" alt="No Image" height="25px" width="25px" />
-            <div class="info">
+            <img *ngIf="article.author.image" [src]="article.author.image" height="25px" width ="25px"/>
+            <img *ngIf="!article.author.image" ng-src="article.author.image" height="25px" width ="25px"/>            <div class="info">
               <a class="author" (click)="callProfile(article.author.username)">{{article.author.username}}</a>
               <span class="date">{{article.createdAt}}</span>
             </div>
@@ -33,13 +33,13 @@
               <span>&hearts;{{article.favoritesCount}}</span>
             </button>
           </div>
-          <div>
+          <div class="tagdiv">
+
             <h3>{{article.title}}</h3>
             <p style="margin-top: 0px;">{{article.description}}</p>
             <ul>
-              <li *ngFor="let taglist of article.tagList">
-                <span>{{taglist}}</span>&nbsp;
-              </li>
+                <li *ngFor="let taglist of article.tagList" class="tag-default tag-pill tag-outline">
+                    <a style="cursor:pointer" (click)="getArticleDetails(article.slug)"> {{taglist}}</a>&nbsp;          </li>
             </ul>
             <!-- <a [routerLink]="['/', article.slug]">
       <span>Read More</span> < /a> -->

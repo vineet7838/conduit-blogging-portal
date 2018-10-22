@@ -11,8 +11,8 @@ user:Object;
 
   constructor(private http: HttpClient) { }
   getArticles(){
-    var a= this.http.get(`${this.url}articles`);
-   return a;
+
+   return this.http.get(`${this.url}articles`);
   }
   makeFeedsRequestonPages(offset){
     return this.http.get(`${this.url}articles?limit=10&offset=${offset}`)
