@@ -10,21 +10,33 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   public selected: Object;
+  public error: Object;
   constructor(private getData: LoginService, private route: Router,private router: ActivatedRoute ) { }
   loginUser(form: NgForm){
     this.getData.authUser(form.value).subscribe((status: Object )=> {
     this.displayData(status);
-    });
+    },
+    (err: Error )=> {
+      console.error(err);
+      this.saveerror(err)
+    
+      }
+      );
+ 
+    }
+    saveerror(data){
+      this.error=data.error.errors;
+      console.log(this.error);
+
     }
     displayData(data){
       this.selected = data;
+      console.log(data.user.email);   
+     
       localStorage.setItem('Token',data.user.token);
       localStorage.setItem('username',data.user.username);
       localStorage.setItem('userimage',data.user.image);
       this.route.navigate(['Home']);
-      // var token=localStorage.getItem('Token');
-      // var username=localStorage.getItem('username');
-      // console.log("username: "+username+"token: "+token);
     }
 
   ngOnInit() {

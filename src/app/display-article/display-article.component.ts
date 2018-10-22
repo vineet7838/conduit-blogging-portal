@@ -14,12 +14,15 @@ export class DisplayArticleComponent implements OnInit {
   public username: string;
   public token: string;
   public match: boolean;
-  public comments: Array<Object>;
- public  following:boolean;
+  public comments;
+  
+
+  public  following:boolean;
   constructor(private router: ActivatedRoute, private getData: DisplayServiceService,
     private route: Router) { }
 
   ngOnInit() {
+    console.log(typeof(this.comments));
     this.match = false;
     this.token=localStorage.getItem('Token');
     this.router.paramMap.subscribe(params => {
@@ -28,11 +31,11 @@ export class DisplayArticleComponent implements OnInit {
         console.log(status);
         this.saveData(status);
       });
-
     })
     //It get all the comments of that particular article
-    this.getData.getAllComments(this.slug).subscribe((status: Array<Object>) => {
-      this.saveComments(status);
+    this.getData.getAllComments(this.slug).subscribe((status: any) => {
+      this.comments=status.comments;
+    //this.saveComments(status);
     });
   }
   callSignin() {
@@ -51,33 +54,35 @@ export class DisplayArticleComponent implements OnInit {
     this.token = localStorage.getItem('Token');
     this.username = localStorage.getItem('username');
     this.following=data.article.author.following;
+    console.log(this.following);
     if (this.token) {
       if (this.username === data.article.author.username) {
-
         this.match = true;
       }
     }
 
   }
   saveComments(data) {
-    this.comments = data;
+    this.comments = data.comments;
+    console.log(this.comments)
   }
   addComment(comment: NgForm) {
-    this.getData.postComment(comment.value, this.slug).subscribe((status: Object) => { this.route.navigate([`New-Article/articles/${this.slug}`]); });
-    this.getData.getAllComments(this.slug).subscribe((status: Array<Object>) => {
-      this.saveComments(status);
-      window.location.reload();
+    this.getData.postComment(comment.value, this.slug).subscribe((status: any) => { 
+      this.comments.push(status.comment); 
     });
+  
 
+  }
+  pushComment(data){
+    console.log(typeof(this.comments));
+    this.comments.push(data.comment);
   }
 
   deleteComment(id) {
-    this.getData.removeComment(id, this.slug).subscribe((status: Object) => { });
-    this.getData.getAllComments(this.slug).subscribe((status: Array<Object>) => {
-      this.saveComments(status);
-      window.location.reload();
-      this.route.navigate([`New-Article/articles/${this.slug}`]);
-    });
+    this.getData.removeComment(id, this.slug).subscribe((status: any) => {
+      this.comments.splice(this.comments.indexOf(status.comment),1)
+     });
+
   }
   deleteArticle() {
     this.getData.removeArticle(this.slug).subscribe((status: Object) => {
@@ -96,7 +101,7 @@ export class DisplayArticleComponent implements OnInit {
   }
   favoriteArticle() {
    
-    this.getData.favorite(this.slug).subscribe((status) => { console.log(status);
+    this.getData.favorite(this.slug).subscribe((status: any) => { console.log(status);
       this.saveData(status); })
   }
   UnfollowUser() {
@@ -109,5 +114,6 @@ export class DisplayArticleComponent implements OnInit {
   }
   saveFollowing(status){
     this.following=status.profile.following;
+    console.log(this.following);
   }
 }

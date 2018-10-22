@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+   public error:Object;
+   
    
   constructor(private getSignupData:SignupService,private route:Router,private router:ActivatedRoute){}
    ngOnInit() {
